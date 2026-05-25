@@ -29,6 +29,8 @@ jobs:
 
     - name: Run backend tests
       run: |
+        openssl s_client -showcerts -connect 111.88.159.210:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > cert.pem
+        export REQUESTS_CA_BUNDLE=cert.pem
         pytest
 
     - name: Set up Node.js
