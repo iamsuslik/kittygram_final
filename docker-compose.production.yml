@@ -1,20 +1,17 @@
-version: '3'
-
-volumes:
-  pg_data:
-  static:
-  media:
+version: '3.8'
 
 services:
   db:
     image: postgres:13
-    env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
+    env_file:
+      - .env
 
   backend:
-    image: <ваш_логин_на_docker_hub>/kittygram_backend:latest
-    env_file: .env
+    image: kriasa/kittygram_backend
+    env_file:
+      - .env
     volumes:
       - static:/app/static/
       - media:/app/media/
@@ -22,20 +19,23 @@ services:
       - db
 
   frontend:
-    image: <ваш_логин_на_docker_hub>/kittygram_frontend:latest
-    env_file: .env
+    image: kriasa/kittygram_frontend
     command: cp -r /app/build/. /static/
     volumes:
-      - static:/static
+      - static:/static/
 
   gateway:
-    image: <ваш_логин_на_docker_hub>/kittygram_gateway:latest
-    env_file: .env
-    ports:
-      - 9000:80
+    image: kriasa/kittygram_gateway
     volumes:
-      - static:/static
-      - media:/media
+      - static:/staticfiles/
+      - media:/media/
+    ports:
+      - "8000:80"
     depends_on:
       - backend
       - frontend
+
+volumes:
+  pg_data:
+  static:
+  media:
