@@ -19,13 +19,13 @@ services:
       - db
 
   frontend:
-    image: iamsuslik/kittygram_backend
+    image: iamsuslik/kittygram_frontend
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static/
 
   gateway:
-    image: iamsuslik/kittygram_backend
+    image: iamsuslik/kittygram_gateway
     volumes:
       - static:/staticfiles/
       - media:/media/
