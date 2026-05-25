@@ -9,7 +9,7 @@ services:
       - .env
 
   backend:
-    image: kriasa/kittygram_backend
+    image: iamsuslik/kittygram_backend
     env_file:
       - .env
     volumes:
@@ -19,13 +19,13 @@ services:
       - db
 
   frontend:
-    image: kriasa/kittygram_frontend
+    image: iamsuslik/kittygram_backend
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static/
 
   gateway:
-    image: kriasa/kittygram_gateway
+    image: iamsuslik/kittygram_backend
     volumes:
       - static:/staticfiles/
       - media:/media/
