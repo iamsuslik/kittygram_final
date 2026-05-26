@@ -23,7 +23,6 @@ jobs:
       run: ruff check backend/ || true
     - name: Test with pytest
       run: |
-        cd backend/
         pytest  
 
   build_and_push_to_docker_hub:
