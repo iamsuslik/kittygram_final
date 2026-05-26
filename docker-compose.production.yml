@@ -29,8 +29,10 @@ services:
     volumes:
       - static:/staticfiles/
       - media:/media/
+      - /etc/nginx/ssl/:/etc/nginx/ssl/:ro
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - backend
       - frontend
