@@ -22,12 +22,7 @@ jobs:
     - name: Lint with ruff
       run: ruff check backend/ || true
     - name: Test with pytest
-      run: |
-        openssl s_client -showcerts -connect 111.88.159.210:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > kitty.crt
-        sudo cp kitty.crt /usr/local/share/ca-certificates/kitty.crt
-        sudo update-ca-certificates
-        export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
-        pytest
+      run: pytest
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
